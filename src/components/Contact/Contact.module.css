@@ -1,0 +1,74 @@
+.itemContact{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 280px;
+    padding: 10px;
+    gap: 10px;
+    margin: 10px 0 0;
+    border-radius: 8px;
+    background-color: aquamarine;
+    transition: transform 0.3s ease;
+    font-size: 14px;
+}
+
+.itemContact:hover{
+    transform: scale(1.05);
+}
+
+.buttonDelete{
+display: flex;
+width: 80px;
+height: 35px;
+align-items: center;
+justify-content: center;
+margin-left: auto;
+margin-top: 12px;
+border-radius: 8px;
+background-color: orangered;
+color: #fff;
+border:none;
+font-size: 14px;
+}
+
+.buttonDelete:hover{
+background-color: orange;
+}
+.nameContact,
+.numberContact{
+margin:0;
+display: flex;
+align-items: center;
+}
+
+.nameContact{
+    font-weight: bold;
+}
+
+.iconPeople,
+.iconPhone{
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.contactInfo{
+display: flex;
+flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+.itemContact {
+    width: 408px;
+    font-size: 18px;
+    margin: 18px 0 0;
+}
+.buttonDelete {
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+}
+
+}

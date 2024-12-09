@@ -1,0 +1,33 @@
+.searchBox {
+    display: flex;
+    flex-direction: column;
+    width: 340px;
+    height: 35px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.labelFilter {
+    text-align: left;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.inputFilter{
+    width: 200px;
+    height: 20px;
+}
+
+
+@media screen and (min-width: 768px) {
+.labelFilter {
+font-size: 18px;
+}
+
+.inputFilter {
+width: 340px;
+    height: 30px;
+}
+}
