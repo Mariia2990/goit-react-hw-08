@@ -1,18 +1,30 @@
-import { useDispatch } from 'react-redux';
-import { logOut } from '../../redux/auth/operations';
-import { useAuth } from '../../hooks';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../redux/auth/operations';
 import css from './UserMenu.module.css';
+import { selectToken, selectUser } from '../../redux/auth/selectors';
+import toast from 'react-hot-toast';
 
-export const UserMenu = () => {
+const UserMenu = () => {
+  const user = useSelector(selectUser);
+  const token = useSelector(selectToken);
   const dispatch = useDispatch();
-  const { user } = useAuth();
+  const handleLogout = () => {
+    toast.promise(dispatch(logout(token)).unwrap(), {
+      loading: 'Logout...',
+      success: <b>The user is logged out!</b>,
+      error: <b>Missing logout!</b>,
+    });
+  };
 
   return (
-    <div className={css.wrapper}>
-      <p className={css.username}>Welcome, {user.name}</p>
-      <button type="button" onClick={() => dispatch(logOut())}>
-        Logout
+    <div className={css.box}>
+      <p className={css.link}>
+        Hello,<span>{user.name}</span>!
+      </p>
+      <button type="button" onClick={handleLogout}>
+        logout
       </button>
     </div>
   );
 };
+export default UserMenu;

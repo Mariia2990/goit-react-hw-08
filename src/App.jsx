@@ -7,6 +7,9 @@ import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
 import { selectError, selectLoading } from './redux/contacts/selectors';
 import { fetchContact } from './redux/contacts/operations';
+import Layout from './components/Layout/Layout';
+import { selectIsRefreshing } from './redux/auth/selectors';
+import { refreshUser } from './redux/auth/operations';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
@@ -17,27 +20,34 @@ const ContactsPage = lazy(() => import('./pages/ContactsPage/ContactsPage'));
 const App = () => {
   const dispatch = useDispatch();
   const loader = useSelector(selectLoading);
+  const isRefreshing = useSelector(selectIsRefreshing);
   const error = useSelector(selectError);
 
   useEffect(() => {
+    dispatch(refreshUser());
     dispatch(fetchContact());
   }, [dispatch]);
+
+  // Show a loading screen while refreshing the session
+  if (isRefreshing) {
+    return <Loader />;
+  }
 
   return (
     <Suspense fallback={<Loader />}>
       {loader && <Loader />}
-      {error && <p>Помилка: {error}</p>}
+      {error && <p>Error: {error}</p>}
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route
-          path="/register"
-          element={
-            <RestrictedRoute
-              redirectTo="/contacts"
-              component={<RegisterPage />}
-            />
-          }
-        />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
+            }
+          />
+        </Route>
+
         <Route
           path="/login"
           element={
@@ -45,9 +55,12 @@ const App = () => {
           }
         />
         <Route
-          path="/contacts"
+          path="/register"
           element={
-            <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
+            <RestrictedRoute
+              redirectTo="/contacts"
+              component={<RegisterPage />}
+            />
           }
         />
         {/* <Route path="*" element={<ErrorPage />} /> */}
