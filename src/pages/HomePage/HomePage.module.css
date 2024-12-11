@@ -1,0 +1,19 @@
+.boxHomePage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    color: #ffffff;
+    font-size:60px;
+    text-align: left;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.logoIcon{
+    width: 220px;
+    height: 280px;
+    fill:#ffffff;
+}

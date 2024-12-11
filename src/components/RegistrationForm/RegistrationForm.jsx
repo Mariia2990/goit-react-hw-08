@@ -1,38 +1,92 @@
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/auth/operations';
-import css from './RegisterForm.module.css';
+import css from './RegistrationForm.module.css';
+import { Field, Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
 
-export const RegisterForm = () => {
+export const RegistrationForm = () => {
+  const initialValues = {
+    name: '',
+    email: '',
+    password: '',
+  };
+
   const dispatch = useDispatch();
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    dispatch(
-      register({
-        name: form.elements.name.value,
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
-    form.reset();
+  const validationSchema = Yup.object({
+    name: Yup.string()
+      .min(3, 'Too Short!')
+      .max(50, 'Too Long!')
+      .required('Required'),
+    email: Yup.string().email('Invalid email address').required('Required'),
+    password: Yup.string()
+      .min(6, 'Password must be at least 6 characters')
+      .required('Required'),
+  });
+
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      await dispatch(register(values)).unwrap();
+      toast.success('Registration successful!');
+      resetForm();
+      setFormSubmitted(true);
+    } catch (error) {
+      toast.error(`Registration failed: ${error}`);
+    }
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
-      <label className={css.label}>
-        Username
-        <input type="text" name="name" />
-      </label>
-      <label className={css.label}>
-        Email
-        <input type="email" name="email" />
-      </label>
-      <label className={css.label}>
-        Password
-        <input type="password" name="password" />
-      </label>
-      <button type="submit">Register</button>
-    </form>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ errors, touched }) => (
+        <Form className={css.form} autoComplete="off">
+          {formSubmitted && (
+            <p className={css.successMessage}>Registration successful!</p>
+          )}
+          <label className={css.label}>
+            Username
+            <Field
+              type="text"
+              name="name"
+              className={errors.name && touched.name ? css.errorInput : ''}
+            />
+            {errors.name && touched.name && (
+              <div className={css.errorMessage}>{errors.name}</div>
+            )}
+          </label>
+          <label className={css.label}>
+            Email
+            <Field
+              type="email"
+              name="email"
+              className={errors.email && touched.email ? css.errorInput : ''}
+            />
+            {errors.email && touched.email && (
+              <div className={css.errorMessage}>{errors.email}</div>
+            )}
+          </label>
+          <label className={css.label}>
+            Password
+            <Field
+              type="password"
+              name="password"
+              className={
+                errors.password && touched.password ? css.errorInput : ''
+              }
+            />
+            {errors.password && touched.password && (
+              <div className={css.errorMessage}>{errors.password}</div>
+            )}
+          </label>
+          <button type="submit">Register</button>
+        </Form>
+      )}
+    </Formik>
   );
 };

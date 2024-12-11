@@ -1,16 +1,17 @@
-import { Helmet } from 'react-helmet-async';
+import { Box } from '@mui/material';
+import { RiContactsBook3Line } from 'react-icons/ri';
+import css from './HomePage.module.css'
 
 export default function HomePage() {
   return (
     <>
-      <Helmet>
-        <title>Home</title>
-      </Helmet>
-      <div>
-        <h1>
-          Phone<span>book</span>
-        </h1>
-      </div>
+      <Box className={css.boxHomePage}>
+        <RiContactsBook3Line className={ css.logoIcon} />
+         <h1 className={css.title}>
+          Welcome to Phone<span>book</span>!
+        </h1> 
+
+      </Box>
     </>
   );
 }

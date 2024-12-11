@@ -3,6 +3,7 @@ import { logout } from '../../redux/auth/operations';
 import css from './UserMenu.module.css';
 import { selectToken, selectUser } from '../../redux/auth/selectors';
 import toast from 'react-hot-toast';
+import { Box } from '@mui/material';
 
 const UserMenu = () => {
   const user = useSelector(selectUser);
@@ -17,14 +18,14 @@ const UserMenu = () => {
   };
 
   return (
-    <div className={css.box}>
+    <Box className={css.boxUserMenu}>
       <p className={css.link}>
         Hello,<span>{user.name}</span>!
       </p>
       <button type="button" onClick={handleLogout}>
         logout
       </button>
-    </div>
+    </Box>
   );
 };
 export default UserMenu;

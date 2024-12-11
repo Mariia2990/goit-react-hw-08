@@ -4,15 +4,18 @@ import AuthNav from "../AuthNav/AuthNav";
 import css from './AppBar.module.css'
 import Navigation from "../Navigation/Navigation";
 import UserMenu from "../UserMenu/UserMenu";
+import { Box } from "@mui/material";
 
 const AppBar = () => {
   const isLogged = useSelector(selectIsLoggedIn);
   return (
     
+    <Box className={css.nav}>
       <div className={css.nav}>
         <Navigation />
         {isLogged ? <UserMenu /> : <AuthNav />}
       </div>
+      </Box>
  
   );
 };
