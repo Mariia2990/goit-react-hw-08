@@ -7,6 +7,20 @@ import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Box,Button } from "@mui/material";
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  boxSizing: 'border-box',
+  maxWidth: '320px',
+  minWidth: '300px',
+  width: '100%',
+  borderRadius: '4px',
+  boxShadow: 24,
+  p: 2,
+};
+
  const LoginForm = () => {
   const initialValues = {
     email: '',
@@ -33,7 +47,7 @@ import { Box,Button } from "@mui/material";
   };
 
   return (
-    <Box>
+    <Box sx={style}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -42,13 +56,13 @@ import { Box,Button } from "@mui/material";
         <Form className={css.form} onSubmit={handleSubmit} autoComplete="off">
           <label className={css.label}>
             Email
-            <Field type="email" name="email" />
+            <Field type="email" name="email" className={css.fieldLogin} />
           </label>
           <label className={css.label}>
             Password
-            <Field type="password" name="password" />
+            <Field type="password" name="password" className={css.fieldLogin} />
           </label>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
+          <Button variant="contained" color="primary" onClick={handleSubmit} sx={{ width: "100px", height: "40px" }}>
             Login
           </Button>
           ;

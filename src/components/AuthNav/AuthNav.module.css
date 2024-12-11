@@ -1,10 +1,10 @@
 .boxAuthNav{
 display: flex;
 flex-direction: row;
-justify-content: space-between;
 
 }
 
 .btn{
     color: #ffff;
+    font-size: 25px;
 }
