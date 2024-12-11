@@ -11,7 +11,7 @@ const Navigation = () => {
     return clsx(isActive && css.active);
   };
   return (
-    <nav>
+    <nav className={css.navNavig}>
   <RiContactsBook3Line className={css.logoIcon} to="/" />
      <NavLink className={nav} to="/">
         Home

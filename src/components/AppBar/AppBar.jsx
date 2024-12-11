@@ -9,8 +9,7 @@ import { Box } from "@mui/material";
 const AppBar = () => {
   const isLogged = useSelector(selectIsLoggedIn);
   return (
-    
-    <Box className={css.nav}>
+   <Box sx={{ flexGrow: 1 }}className={css.boxAppBar}>
       <div className={css.nav}>
         <Navigation />
         {isLogged ? <UserMenu /> : <AuthNav />}

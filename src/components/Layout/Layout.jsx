@@ -4,7 +4,7 @@ import AppBar from "../AppBar/AppBar";
 const Layout = () => {
     return (
       <div>
-        <AppBar />
+        <AppBar position="static" />
         <Outlet />
       </div>
     );
