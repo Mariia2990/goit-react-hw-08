@@ -12,7 +12,6 @@ const ContactsPage = () => {
   const dispatch = useDispatch();
   const loader = useSelector(selectLoading);
   const error = useSelector(selectError);
-  // const contacts = useSelector(selectContacts);
 
   useEffect(() => {
     dispatch(fetchContact());
@@ -20,7 +19,7 @@ const ContactsPage = () => {
 
   return (
       <div>
-        <h1 style={{ fontSize: 40, lineHeight: 1.2 }}>Phonebook</h1>
+        <h2>Phone<span>book</span></h2>
       <ContactForm />
       <SearchBox />
       {loader && !error && <Loader />}
