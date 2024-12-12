@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
     width: 100%;
+
 }
 
 .label {
@@ -10,7 +11,7 @@
   flex-direction: column;
   margin-bottom: 16px;
 color: #fff;
-font-size: 18px;
+font-size: 22px;
 }
 
 
@@ -25,7 +26,7 @@ display: flex;
 
 .fieldLogin{
  width: 100%;
-    height: 20px;
+    height: 40px;
     padding-left: 20px;
     padding-top: 8px;
     padding-bottom: 4px;
@@ -43,14 +44,8 @@ display: flex;
 
 @media screen and (min-width: 768px) {
   .fieldLogin {
-    width: 300px;
-    height: 30px;
+    width: 340px;
+    height: 50px;
   }
 }
 
-@media screen and (min-width: 1280px) {
-  .fieldLogin {
-    width: 340px;
-    height: 30px;
-  }
-}

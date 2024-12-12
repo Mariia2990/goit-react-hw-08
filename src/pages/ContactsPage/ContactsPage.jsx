@@ -12,16 +12,20 @@ const ContactsPage = () => {
   const dispatch = useDispatch();
   const loader = useSelector(selectLoading);
   const error = useSelector(selectError);
+  // const contacts = useSelector(selectContacts);
+
   useEffect(() => {
     dispatch(fetchContact());
   }, [dispatch]);
+
   return (
-    <div>
+      <div>
+        <h1 style={{ fontSize: 40, lineHeight: 1.2 }}>Phonebook</h1>
       <ContactForm />
       <SearchBox />
       {loader && !error && <Loader />}
       <ContactList />
-    </div>
+      </div>
   );
 };
 export default ContactsPage;

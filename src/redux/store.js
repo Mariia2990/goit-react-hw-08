@@ -15,7 +15,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
-  key: 'auth',
+  key: 'root',
   version: 1,
   storage,
   whitelist: ['token'],
@@ -31,11 +31,11 @@ export const store = configureStore({
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
+      immutableCheck: false,
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
 });
 export const persistor = persistStore(store);
-export default store;
 

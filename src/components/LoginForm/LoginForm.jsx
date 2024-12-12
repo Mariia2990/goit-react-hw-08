@@ -13,12 +13,14 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   boxSizing: 'border-box',
-  maxWidth: '320px',
-  minWidth: '300px',
+  maxWidth: '440px',
+  minWidth: '320px',
   width: '100%',
+  height:'480px',
   borderRadius: '4px',
   boxShadow: 24,
   p: 2,
+  paddingTop: '60px',
 };
 
  const LoginForm = () => {
@@ -37,14 +39,19 @@ const style = {
       .required('Required'),
   });
 
-  const handleSubmit = (values, action) => {
-    toast.promise(dispatch(login(values)).unwrap(), {
+ const handleSubmit = async (values, { resetForm }) => {
+  try {
+    await toast.promise(dispatch(login(values)).unwrap(), {
       loading: 'Login...',
       success: <b>User is logged in!</b>,
       error: <b>Login error!</b>,
     });
-    action.resetForm();
-  };
+    resetForm(); 
+  } catch (error) {
+    console.error('Login error:', error);
+  }
+};
+
 
   return (
     <Box sx={style}>
@@ -62,7 +69,17 @@ const style = {
             Password
             <Field type="password" name="password" className={css.fieldLogin} />
           </label>
-          <Button variant="contained" color="primary" onClick={handleSubmit} sx={{ width: "100px", height: "40px" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{
+              width: '180px',
+              height: '60px',
+              marginTop: '50px',
+              fontSize: '22px',
+              backgroundColor: '#dae445',
+            }}
+          >
             Login
           </Button>
           ;
