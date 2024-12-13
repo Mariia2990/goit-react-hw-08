@@ -3,9 +3,15 @@ import css from './AuthNav.module.css';
 import { Button } from '@mui/material';
 
 const buttonStyles = {
-color: '#ffff',
-fontSize: '22px',
-}
+  color: '#ffff', 
+  fontSize: '22px', 
+  '&:hover': {
+    color: '#DAE445', 
+  },
+  '&:focus': {
+    color: '#DAE445', 
+  },
+};
 const AuthNav = () => {
   return (
     <div className={css.boxAuthNav}>
