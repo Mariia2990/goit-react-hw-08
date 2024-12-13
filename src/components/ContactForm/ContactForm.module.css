@@ -1,7 +1,8 @@
 .formContact{
 display: flex;
 flex-direction: column;
-background-color:aquamarine;
+justify-content: center;
+background-color:#268cfd;
 padding: 16px;
 width: 280px;
 height: 160px;
@@ -16,7 +17,7 @@ align-items: center;
 justify-content: center;
 border-radius:8px;
 margin: 0 auto;
-background-color:yellow;
+background-color:#eded3c;
 border: none;
 margin-top: 8px;
 font-size: 12px;

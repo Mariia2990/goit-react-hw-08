@@ -10,6 +10,17 @@
 
 .boxUserMenu {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    gap:20px;
+    font-size: 25px;
+    color:#fff;
+}
+
+.btnLogout{
+background-color: #268cfd; 
+height: 50px;
+display: flex;
+align-items: center;
+justify-content: center;
 }

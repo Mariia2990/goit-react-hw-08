@@ -20,10 +20,10 @@ const UserMenu = () => {
   return (
     <Box className={css.boxUserMenu}>
       <p className={css.link}>
-        Hello,<span>{user.name}</span>!
+        Hello, <span>{user.name}</span>!
       </p>
-      <button type="button" onClick={handleLogout}>
-        logout
+      <button type="button" onClick={handleLogout} className={css.btnLogout}>
+        Logout
       </button>
     </Box>
   );
