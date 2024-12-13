@@ -66,7 +66,6 @@ export const refreshUser = createAsyncThunk('auth/refreshUser', async (_, thunkA
       const response = await baseApi.get('/users/current');
       return response.data;
     } catch (error) {
-      console.error('Refresh error:', error.message); // Лог помилки
       return thunkAPI.rejectWithValue(error.message);
     }
   },
