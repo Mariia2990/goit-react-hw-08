@@ -1,6 +1,6 @@
 a{
 color: #fff;
-font-size: 25px;
+font-size: 20px;
 }
 
 
@@ -14,4 +14,20 @@ font-size: 25px;
     display: flex;
     gap:10px;
     align-items: center;
+    color: #fff;
+        font-size: 25px;
+}
+
+
+@media screen and (min-width: 1280px) {
+    a {
+        color: #fff;
+        font-size: 30px;
+    }
+
+        .logoIcon {
+            width: 60px;
+            height: 60px;
+        }
+
 }

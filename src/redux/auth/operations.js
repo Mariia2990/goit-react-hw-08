@@ -10,7 +10,6 @@ export const baseApi = axios.create({
 
 
 const setAuthHeader = token => {
-  console.log('Setting auth token:', token); 
   baseApi.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -65,7 +64,6 @@ export const refreshUser = createAsyncThunk('auth/refreshUser', async (_, thunkA
     try {
       setAuthHeader(token);
       const response = await baseApi.get('/users/current');
-      console.log('User refreshed:', response.data); // Лог результату
       return response.data;
     } catch (error) {
       console.error('Refresh error:', error.message); // Лог помилки

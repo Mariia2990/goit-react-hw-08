@@ -9,7 +9,7 @@
     border-radius: 8px;
     background-color: #268cfd;
     transition: transform 0.3s ease;
-    font-size: 14px;
+    font-size: 10px;
     color:#fff;
 }
 
@@ -19,7 +19,7 @@
 
 .buttonDelete{
 display: flex;
-width: 80px;
+width: 70px;
 height: 35px;
 align-items: center;
 justify-content: center;
@@ -29,7 +29,7 @@ border-radius: 8px;
 background-color: orangered;
 color: #fff;
 border:none;
-font-size: 14px;
+font-size: 12px;
 }
 
 .buttonDelete:hover{

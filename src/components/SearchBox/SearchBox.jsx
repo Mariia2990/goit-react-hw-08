@@ -9,12 +9,12 @@ const SearchBox = () => {
 
   return (
     <div className={css.searchBox}>
-      <label className={css.labelFilter}>
-        Find contacts:
+      <label className={css.labelFilter} >
         <input
           className={css.inputFilter}
           type="text"
           value={filter}
+          placeholder="Find contacts"
           onChange={e => dispatch(changeFilter(e.target.value))}
         />
       </label>
