@@ -45,6 +45,7 @@ export const login = createAsyncThunk(
     }
   },
 );
+
 export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await baseApi.post('/users/logout');
