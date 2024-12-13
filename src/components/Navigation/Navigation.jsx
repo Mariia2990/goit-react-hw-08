@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import css from './Navigation.module.css';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
@@ -7,13 +7,19 @@ import { RiContactsBook3Line } from 'react-icons/ri';
 
 const Navigation = () => {
   const isLogged = useSelector(selectIsLoggedIn);
+
   const nav = ({ isActive }) => {
     return clsx(isActive && css.active);
   };
+
   return (
     <nav className={css.navNavig}>
-  <RiContactsBook3Line className={css.logoIcon} to="/" />
-     <NavLink className={nav} to="/">
+
+      <Link to="/" className={css.logoLink}>
+        <RiContactsBook3Line className={css.logoIcon} />
+      </Link>
+
+      <NavLink className={nav} to="/">
         Home
       </NavLink>
 
@@ -22,8 +28,8 @@ const Navigation = () => {
           Contacts
         </NavLink>
       )}
-  </nav>
+    </nav>
   );
 };
 
-export default Navigation
+export default Navigation;
