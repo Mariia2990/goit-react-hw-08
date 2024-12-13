@@ -3,9 +3,9 @@ import { login } from '../../redux/auth/operations';
 import css from './LoginForm.module.css';
 import toast from 'react-hot-toast';
 import { Field, Form, Formik } from 'formik';
-// import { useState } from 'react';
 import * as Yup from 'yup';
-import { Box,Button } from "@mui/material";
+import { Box, Button } from '@mui/material';
+import { useState, useEffect } from 'react';
 
 const style = {
   position: 'absolute',
@@ -16,22 +16,20 @@ const style = {
   maxWidth: '440px',
   minWidth: '320px',
   width: '100%',
-  height:'480px',
+  height: '480px',
   borderRadius: '4px',
   boxShadow: 24,
   p: 2,
   paddingTop: '60px',
 };
 
- const LoginForm = () => {
-  const initialValues = {
-    email: '',
-    password: '',
-  };
-
+const LoginForm = () => {
   const dispatch = useDispatch();
-  // const [password, setPassword] = useState(false);
-  
+  const [email, setEmail] = useState(() => localStorage.getItem('email') || ''); 
+  const [password, setPassword] = useState(''); 
+
+  const initialValues = { email, password };
+
   const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email address').required('Required'),
     password: Yup.string()
@@ -39,19 +37,23 @@ const style = {
       .required('Required'),
   });
 
- const handleSubmit = async (values, { resetForm }) => {
-  try {
-    await toast.promise(dispatch(login(values)).unwrap(), {
-      loading: 'Login...',
-      success: <b>User is logged in!</b>,
-      error: <b>Login error!</b>,
-    });
-    resetForm(); 
-  } catch (error) {
-    console.error('Login error:', error);
-  }
-};
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      await toast.promise(dispatch(login(values)).unwrap(), {
+        loading: 'Logging in...',
+        success: <b>Logged in successfully!</b>,
+        error: <b>Failed to log in!</b>,
+      });
+      localStorage.setItem('email', values.email); 
+      resetForm();
+    } catch (error) {
+      console.error('Login error:', error);
+    }
+  };
 
+  useEffect(() => {
+    setEmail(localStorage.getItem('email') || '');
+  }, []);
 
   return (
     <Box sx={style}>
@@ -60,30 +62,50 @@ const style = {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form className={css.form} onSubmit={handleSubmit} autoComplete="off">
-          <label className={css.label}>
-            Email
-            <Field type="email" name="email" className={css.fieldLogin} />
-          </label>
-          <label className={css.label}>
-            Password
-            <Field type="password" name="password" className={css.fieldLogin} />
-          </label>
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{
-              width: '180px',
-              height: '60px',
-              marginTop: '50px',
-              fontSize: '22px',
-              backgroundColor: '#dae445',
-            }}
-          >
-            Login
-          </Button>
-          ;
-        </Form>
+        {({ values, handleChange }) => (
+          <Form className={css.form} autoComplete="off">
+            <label className={css.label}>
+              Email
+              <Field
+                type="email"
+                name="email"
+                className={css.fieldLogin}
+                value={values.email}
+                onChange={e => {
+                  handleChange(e);
+                  setEmail(e.target.value);
+                }}
+              />
+            </label>
+            <label className={css.label}>
+              Password
+              <Field
+                type="password"
+                name="password"
+                className={css.fieldLogin}
+                value={values.password}
+                onChange={e => {
+                  handleChange(e);
+                  setPassword(e.target.value); 
+                }}
+              />
+            </label>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              sx={{
+                width: '180px',
+                height: '60px',
+                marginTop: '50px',
+                fontSize: '22px',
+                backgroundColor: '#dae445',
+              }}
+            >
+              Login
+            </Button>
+          </Form>
+        )}
       </Formik>
     </Box>
   );

@@ -7,7 +7,7 @@ export const baseApi = axios.create({
     'Content-Type': 'application/json',
   },
 });
-console.log(baseApi.defaults.headers);
+
 
 const setAuthHeader = token => {
   console.log('Setting auth token:', token); 
@@ -34,11 +34,14 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
+    console.log('Login credentials:', credentials);
     try {
       const response = await baseApi.post('/users/login', credentials);
+      console.log('Login response:', response.data);
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
+       console.error('Login error:', error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   },
@@ -52,21 +55,20 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   }
 });
 
-export const refreshUser = createAsyncThunk(
-  'auth/refresh',
-  async (_, thunkAPI) => {
-    const savedToken = thunkAPI.getState().auth.token;
-    console.log(savedToken);
-
-    if (!savedToken) {
-      return thunkAPI.rejectWithValue('Token is not exist!');
-    }
-
+export const refreshUser = createAsyncThunk('auth/refreshUser', async (_, thunkAPI) => {
+  const token =
+    thunkAPI.getState().auth.token || localStorage.getItem('authToken');
+  if (!token) {
+    throw new Error('No token found. Refresh aborted.');
+  }
+ 
     try {
-      setAuthHeader(savedToken);
-      const { data } = await baseApi.get('/users/current');
-      return data;
+      setAuthHeader(token);
+      const response = await baseApi.get('/users/current');
+      console.log('User refreshed:', response.data); // Лог результату
+      return response.data;
     } catch (error) {
+      console.error('Refresh error:', error.message); // Лог помилки
       return thunkAPI.rejectWithValue(error.message);
     }
   },

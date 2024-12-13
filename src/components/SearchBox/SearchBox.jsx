@@ -10,7 +10,7 @@ const SearchBox = () => {
   return (
     <div className={css.searchBox}>
       <label className={css.labelFilter}>
-        Find contacts by name:
+        Find contacts:
         <input
           className={css.inputFilter}
           type="text"
