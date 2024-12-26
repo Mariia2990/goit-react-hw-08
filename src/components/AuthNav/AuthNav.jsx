@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 
 const buttonStyles = {
   color: '#ffff', 
-  fontSize: '22px', 
+  fontSize: '20px', 
   '&:hover': {
     color: '#DAE445', 
   },

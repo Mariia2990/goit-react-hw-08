@@ -15,12 +15,11 @@ const style = {
   boxSizing: 'border-box',
   maxWidth: '440px',
   minWidth: '320px',
-  width: '100%',
   height: '480px',
   borderRadius: '4px',
   boxShadow: 24,
   p: 2,
-  paddingTop: '60px',
+  padding: '60px 16px 16px 16px',
 };
 
 const LoginForm = () => {
@@ -56,7 +55,7 @@ const LoginForm = () => {
   }, []);
 
   return (
-    <Box sx={style}>
+    <Box sx={style} className={css.LoginBox}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
